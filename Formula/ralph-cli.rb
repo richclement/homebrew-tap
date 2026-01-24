@@ -1,26 +1,26 @@
 class RalphCli < Formula
   desc "Ralph Wiggum CLI tool"
   homepage "https://github.com/richclement/ralph-cli"
-  version "0.5.0"
+  version "0.6.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_darwin_arm64.tar.gz"
-      sha256 "6d2192511a3ea4d4e54e9d796f11d8771f3673cbac306f0d4e1362bfee624fef"
+      sha256 "1b97b58686c5d22da53591f61a5889efab244dfcce558887330965d10c521e32"
     else
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_darwin_amd64.tar.gz"
-      sha256 "c5c256b78c0cea9f06555a33461945948dcb42f4f58afa9c4145043588754a43"
+      sha256 "fa78348d252000da2171275727f217bf7f30be23838a5e0f0629b0b6598be6e0"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_linux_arm64.tar.gz"
-      sha256 "71f97144882a1e74b023d1d7335976693b5c0f41dd994cf97f0d16f17d683afa"
+      sha256 "bd4d04f93d5a22db0b25ba40b72121147d623f2a1e6ee4b20dbda1b47e3e2aac"
     else
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_linux_amd64.tar.gz"
-      sha256 "3fd0eb55e5b3284265e55707c13e295f256dbb73cc3424917f588a192633c146"
+      sha256 "c2f04a5103eb0daa278052e5bd2edb00dbfa56a157d81847820c1dc19d99a22d"
     end
   end
 
