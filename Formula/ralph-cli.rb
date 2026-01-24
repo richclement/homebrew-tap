@@ -1,7 +1,7 @@
 class RalphCli < Formula
   desc "Ralph Wiggum CLI tool"
   homepage "https://github.com/richclement/ralph-cli"
-  version "0.4.0"
+  version "0.5.0"
   license "MIT"
 
   on_macos do
