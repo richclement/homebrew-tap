@@ -7,20 +7,20 @@ class RalphCli < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_darwin_arm64.tar.gz"
-      sha256 "9466bed9e514081497db8ee6454744a19f30a44b9918f7d3eb3eed5cf9e326e8"
+      sha256 "6d2192511a3ea4d4e54e9d796f11d8771f3673cbac306f0d4e1362bfee624fef"
     else
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_darwin_amd64.tar.gz"
-      sha256 "cd7bbf99e55dec6051aeb673bf80fb2cf5c677b138e5d293a2b9b0faff293b81"
+      sha256 "c5c256b78c0cea9f06555a33461945948dcb42f4f58afa9c4145043588754a43"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_linux_arm64.tar.gz"
-      sha256 "ea4fb7078fceaad1591f5d6ad0f62dc0b7f6495107732a7d162de2d6e5300edf"
+      sha256 "71f97144882a1e74b023d1d7335976693b5c0f41dd994cf97f0d16f17d683afa"
     else
       url "https://github.com/richclement/ralph-cli/releases/download/v#{version}/ralph_#{version}_linux_amd64.tar.gz"
-      sha256 "b58875e4fa5348e68c20826ed142b940607a99100a120b58141aebf1a6c13e20"
+      sha256 "3fd0eb55e5b3284265e55707c13e295f256dbb73cc3424917f588a192633c146"
     end
   end
 
