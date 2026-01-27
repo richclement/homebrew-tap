@@ -1,4 +1,4 @@
-class TfcCLI < Formula
+class Tfccli < Formula
   desc "Terraform Cloud CLI tool"
   homepage "https://github.com/richclement/tfccli"
   version "0.11.0"
