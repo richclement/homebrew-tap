@@ -1,26 +1,26 @@
 class Tu < Formula
   desc "CLI for measuring token usage across files and directories"
   homepage "https://github.com/richclement/tu"
-  version "0.1.0.0"
+  version "0.1.1"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/richclement/tu/releases/download/v#{version}/tu_#{version}_darwin_arm64.tar.gz"
-      sha256 "091ac4b56ac3a0cd30c57ff35ca32bc1265b45ead1a86c18bd41188a5a39164d"
+      sha256 "bf96eef7886da4e38ae857d9d73cc5d585430842b601eedde3d6be516369da20"
     else
       url "https://github.com/richclement/tu/releases/download/v#{version}/tu_#{version}_darwin_amd64.tar.gz"
-      sha256 "a5616cfcff8298e6fbe7d29dd63a7150b63186a3279c6fd4cffcb8c3ef962ae6"
+      sha256 "840cacd6ce0ac584bd6660f3571de8c8603eaac8b8532b361c6caf424dd23f9e"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/richclement/tu/releases/download/v#{version}/tu_#{version}_linux_arm64.tar.gz"
-      sha256 "6cb3c4381b132de08a2b9f76aea7ae4bef4343596e4751d71f477ac19bfbb00a"
+      sha256 "e20b09c3157c9af6eb5e71d77cf8f04d273819783100ea0cbc075f1fbe568ec5"
     else
       url "https://github.com/richclement/tu/releases/download/v#{version}/tu_#{version}_linux_amd64.tar.gz"
-      sha256 "3c534b870c47772de64045871717f3ea7798a6a8466c16698f75f31265b2aa8d"
+      sha256 "7ef17017418ef35ae496801d7f192388986beaf0f89a6f4a66ea5db51ccbbe74"
     end
   end
 
