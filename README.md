@@ -6,19 +6,23 @@ Homebrew formulae for richclement tools.
 
 ```bash
 brew tap richclement/tap
-brew install ralph-cli
+brew install richclement/tap/tu
+brew install richclement/tap/ralph-cli
+brew install richclement/tap/tfccli
 ```
 
 ## Install Packages
 
 ```bash
-# formula
+# install a specific formula
 brew install richclement/tap/<name>
 ```
 
 ## Available Formulae
 
+- `tu` - CLI for measuring token usage across files and directories
 - `ralph-cli` - CLI tool for ralph
+- `tfccli` - Terraform Cloud CLI tool
 
 ## Update / Uninstall
 

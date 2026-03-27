@@ -1,0 +1,88 @@
+name: Formula PR
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "Formula/*.rb"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate formulae (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Homebrew on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          if ! command -v brew >/dev/null 2>&1; then
+            NONINTERACTIVE=1 CI=1 /bin/bash -c \
+              "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          fi
+          {
+            echo "/home/linuxbrew/.linuxbrew/bin"
+            echo "/home/linuxbrew/.linuxbrew/sbin"
+          } >> "$GITHUB_PATH"
+
+      - name: Fetch base branch
+        shell: bash
+        run: git fetch origin "${{ github.base_ref }}":"refs/remotes/origin/${{ github.base_ref }}"
+
+      - name: Tap checked out repository
+        shell: bash
+        run: |
+          if brew tap | grep -qx 'richclement/tap'; then
+            brew untap richclement/tap
+          fi
+          brew tap --custom-remote richclement/tap "$GITHUB_WORKSPACE"
+
+      - name: Detect changed formulae
+        id: formulae
+        shell: bash
+        run: |
+          formulae="$(
+            git diff --name-only "origin/${{ github.base_ref }}"...HEAD -- 'Formula/*.rb' |
+              sed -n 's#^Formula/\(.*\)\.rb$#\1#p'
+          )"
+
+          if [ -z "$formulae" ]; then
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          {
+            echo "count=$(printf '%s\n' "$formulae" | wc -l | tr -d ' ')"
+            echo "formulae<<EOF"
+            printf '%s\n' "$formulae"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Audit, install, and test changed formulae
+        if: steps.formulae.outputs.count != '0'
+        shell: bash
+        run: |
+          # PRs should prove the formula actually installs, not just that the Ruby parses.
+          while IFS= read -r formula; do
+            [ -z "$formula" ] && continue
+            brew audit --strict --online "richclement/tap/${formula}"
+            brew install "richclement/tap/${formula}"
+            brew test "richclement/tap/${formula}"
+          done <<'EOF'
+          ${{ steps.formulae.outputs.formulae }}
+          EOF
